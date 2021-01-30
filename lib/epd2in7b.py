@@ -241,11 +241,6 @@ class EPD:
         self.send_command(0x10)
         for i in range(0, self.width * self.height // 8):
             self.send_data(0x00)
-        self.send_command(0x11) 
-        
-        self.send_command(0x13)
-        for i in range(0, self.width * self.height // 8):
-            self.send_data(0x00)
         self.send_command(0x11)
         
         self.send_command(0x12) 
