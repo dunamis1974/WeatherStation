@@ -228,15 +228,10 @@ class EPD:
                         buf[(newx + newy*self.width) // 8] &= ~(0x80 >> (y % 8))
         return buf
 
-    def display(self, imageblack, imagered):
+    def display(self, imageblack):
         self.send_command(0x10)
         for i in range(0, self.width * self.height // 8):
             self.send_data(~imageblack[i])
-        self.send_command(0x11)
-        
-        self.send_command(0x13)
-        for i in range(0, self.width * self.height // 8):
-            self.send_data(~imagered[i])
         self.send_command(0x11)
         
         self.send_command(0x12) 
