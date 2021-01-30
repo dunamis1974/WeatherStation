@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
 # *************************************************** 
@@ -10,10 +10,10 @@
 #   It uses the weather API provided by Open Weather Map (https://openweathermap.org/api) to
 #   query the current weather for a given location and then display it on the ePaper display.
 #   It refreshes the weather information every 10 minutes and updates the display.
- 
 #   Written by Sridhar Rajagopal for ProtoStax.
 #   BSD license. All text above must be included in any redistribution
 # *
+
 import sys
 sys.path.append(r'lib')
 
@@ -29,7 +29,7 @@ import pyowm
 if sys.version_info[0] < 3:
     raise Exception("Must be using Python 3")
 
-owm = pyowm.OWM('REPLACE_WITH_YOUR_OWM_API_KEY')
+owm = pyowm.OWM('<OWM-API-KEY>')
 
 # You can invoke the weather apis by City Name, City ID, Lat/Long or
 # by Zip Code.
@@ -41,7 +41,7 @@ owm = pyowm.OWM('REPLACE_WITH_YOUR_OWM_API_KEY')
 #
 
 # REPLACE WITH YOUR CITY ID
-city_id = 5375480 # Mountain View, CA, USA
+city_id = 727012 # Sofia/Bulgaria
 
 # An easy way to display icons and artwork on your ePaper display is to use a font like
 # Meteocons, which maps font letters to specific icons, so by printing a character "B" you can print
@@ -93,7 +93,7 @@ def main():
         weather = obs.get_weather()
         reftime = weather.get_reference_time()
         description = weather.get_detailed_status()
-        temperature = weather.get_temperature(unit='fahrenheit')
+        temperature = weather.get_temperature(unit='celsius')
         humidity = weather.get_humidity()
         pressure = weather.get_pressure()
         clouds = weather.get_clouds()
@@ -142,7 +142,7 @@ def main():
             drawred.text((264 - w3 - 10, 0), weather_icon_dict[weather.get_weather_code()], font = fontweatherbig, fill = 0)
             drawblack.text((10, 45), "Observed at: " + time.strftime( '%I:%M %p', time.localtime(reftime)), font = font16, fill = 0)
             
-            tempstr = str("{0}{1}F".format(int(round(temperature['temp'])), u'\u00b0'))
+            tempstr = str("{0}{1}C".format(int(round(temperature['temp'])), u'\u00b0'))
             print( tempstr)
             w4, h4 = font24.getsize(tempstr)
             drawblack.text((10, 70), tempstr, font = font24, fill = 0)
