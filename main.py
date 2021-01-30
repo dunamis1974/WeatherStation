@@ -42,7 +42,7 @@ owm = pyowm.OWM(config['General']['owm_api_key'])
 #
 
 # REPLACE WITH YOUR CITY ID
-city_id = config['General']['owm_city']
+city_id = int(config['General']['owm_city'])
 
 # Refer to http://www.alessioatzeni.com/meteocons/ for the mapping of meteocons to characters,
 # and modify the dictionary below to change icons you want to use for different weather conditions!
