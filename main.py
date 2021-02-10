@@ -167,10 +167,10 @@ def main():
         drawblack.text((20, 100), "Outside", font=font20, fill=0)
         drawblack.text((160, 100), "Bedroom", font=font20, fill=0)
 
-        drawblack.text((35, 120), "A", font=fontweather, fill=0)
-        drawblack.text((175, 120), "J", font=fontweather, fill=0)
-        drawblack.text((10, 150), time.strftime('%I:%M %p', time.localtime(sunrise)), font=font20, fill=0)
-        drawblack.text((150, 150), time.strftime('%I:%M %p', time.localtime(sunset)), font=font20, fill=0)
+        drawblack.text((40, 120), "A", font=fontweather, fill=0)
+        drawblack.text((180, 120), "J", font=fontweather, fill=0)
+        drawblack.text((20, 150), time.strftime('%I:%M %p', time.localtime(sunrise)), font=font20, fill=0)
+        drawblack.text((160, 150), time.strftime('%I:%M %p', time.localtime(sunset)), font=font20, fill=0)
 
         epd.display(epd.getbuffer(HBlackimage))
         time.sleep(2)
