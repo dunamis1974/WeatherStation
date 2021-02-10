@@ -148,29 +148,30 @@ def main():
         drawblack.text((10, 0), location, font=font24, fill=0)
         drawblack.text((10 + (w1 / 2 - w2 / 2), 25), description, font=font20, fill=0)
         drawblack.text((264 - w3 - 10, 0), weather_icon_dict[weather.get_weather_code()], font=fontweatherbig, fill=0)
-        drawblack.text((10, 45), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16, fill=0)
+        drawblack.text((10, 45), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16,
+                       fill=0)
 
         temp_out = str("{0}{1}C".format(temperature_outside, u'\u00b0'))
         w4, h4 = font24.getsize(temp_out)
-        drawblack.text((10, 70), temp_out, font=font24, fill=0)
-        drawblack.text((10 + w4, 70), "'", font=fontweather, fill=0)
+        drawblack.text((10, 80), temp_out, font=font24, fill=0)
+        drawblack.text((10 + w4, 80), "'", font=fontweather, fill=0)
 
         temp_bed = str("{0}{1}C".format(temperature_bedroom, u'\u00b0'))
         w4, h4 = font24.getsize(temp_bed)
-        drawblack.text((150, 70), temp_bed, font=font24, fill=0)
-        drawblack.text((150 + w4, 70), "'", font=fontweather, fill=0)
+        drawblack.text((150, 80), temp_bed, font=font24, fill=0)
+        drawblack.text((150 + w4, 80), "'", font=fontweather, fill=0)
 
-        # drawblack.text((150, 70), str("{0}{1} | {2}{3}".format(int(round(temperature['temp_min'])), u'\u00b0',
-        #                                                        int(round(temperature['temp_max'])), u'\u00b0')),
-        #                font=font24, fill=0)
+        drawblack.text((20, 120), "Outside", font=font20, fill=0)
+        drawblack.text((160, 120), "Bedroom", font=font20, fill=0)
 
-        drawblack.text((20, 100), "Outside", font=font20, fill=0)
-        drawblack.text((160, 100), "Bedroom", font=font20, fill=0)
-
-        drawblack.text((40, 120), "A", font=fontweather, fill=0)
-        drawblack.text((185, 120), "J", font=fontweather, fill=0)
-        drawblack.text((20, 150), time.strftime('%I:%M %p', time.localtime(sunrise)), font=font20, fill=0)
-        drawblack.text((160, 150), time.strftime('%I:%M %p', time.localtime(sunset)), font=font20, fill=0)
+        drawblack.text((20, 160), str("min {0}{1}          {2}{3} max".format(
+            int(round(temperature['temp_min'])), u'\u00b0',
+            int(round(temperature['temp_max'])), u'\u00b0')),
+                       font=font24, fill=0)
+        # drawblack.text((40, 120), "A", font=fontweather, fill=0)
+        # drawblack.text((185, 120), "J", font=fontweather, fill=0)
+        # drawblack.text((20, 150), time.strftime('%I:%M %p', time.localtime(sunrise)), font=font20, fill=0)
+        # drawblack.text((160, 150), time.strftime('%I:%M %p', time.localtime(sunset)), font=font20, fill=0)
 
         epd.display(epd.getbuffer(HBlackimage))
         time.sleep(2)
