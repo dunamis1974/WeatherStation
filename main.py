@@ -164,8 +164,8 @@ def main():
         #                                                        int(round(temperature['temp_max'])), u'\u00b0')),
         #                font=font24, fill=0)
 
-        drawblack.text((10, 100), "Outside", font=font20, fill=0)
-        drawblack.text((150, 100), "Bedroom", font=font20, fill=0)
+        drawblack.text((20, 100), "Outside", font=font20, fill=0)
+        drawblack.text((160, 100), "Bedroom", font=font20, fill=0)
 
         drawblack.text((20, 120), "A", font=fontweather, fill=0)
         drawblack.text((160, 120), "J", font=fontweather, fill=0)
