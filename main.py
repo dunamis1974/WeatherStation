@@ -148,7 +148,7 @@ def main():
         drawblack.text((10, 0), location, font=font24, fill=0)
         drawblack.text((10 + (w1 / 2 - w2 / 2), 25), description, font=font20, fill=0)
         drawblack.text((264 - w3 - 10, 0), weather_icon_dict[weather.get_weather_code()], font=fontweatherbig, fill=0)
-        drawblack.text((10, 45), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16,
+        drawblack.text((10, 47), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16,
                        fill=0)
 
         temp_out = str("{0}{1}C".format(temperature_outside, u'\u00b0'))
