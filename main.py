@@ -148,21 +148,24 @@ def main():
         drawblack.text((10, 0), location, font=font24, fill=0)
         drawblack.text((10 + (w1 / 2 - w2 / 2), 25), description, font=font20, fill=0)
         drawblack.text((264 - w3 - 10, 0), weather_icon_dict[weather.get_weather_code()], font=fontweatherbig, fill=0)
-        drawblack.text((10, 45), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16,
-                       fill=0)
+        drawblack.text((10, 45), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16, fill=0)
 
-        # tempstr = str("{0}{1}C".format(int(round(temperature['temp'])), u'\u00b0'))
-        tempstr = str("{0}{1}C".format(temperature_outside, u'\u00b0'))
-        # print(tempstr)
-        w4, h4 = font24.getsize(tempstr)
-        drawblack.text((10, 70), tempstr, font=font24, fill=0)
+        temp_out = str("{0}{1}C".format(temperature_outside, u'\u00b0'))
+        w4, h4 = font24.getsize(temp_out)
+        drawblack.text((10, 70), temp_out, font=font24, fill=0)
         drawblack.text((10 + w4, 70), "'", font=fontweather, fill=0)
-        drawblack.text((150, 70), str("{0}{1} | {2}{3}".format(int(round(temperature['temp_min'])), u'\u00b0',
-                                                               int(round(temperature['temp_max'])), u'\u00b0')),
-                       font=font24, fill=0)
 
-        drawblack.text((10, 100), str("{} hPA".format(int(round(pressure['press'])))), font=font20, fill=0)
-        drawblack.text((150, 100), str("{}% RH".format(int(round(humidity)))), font=font20, fill=0)
+        temp_bed = str("{0}{1}C".format(temperature_bedroom, u'\u00b0'))
+        w4, h4 = font24.getsize(temp_bed)
+        drawblack.text((150, 70), temp_bed, font=font24, fill=0)
+        drawblack.text((150 + w4, 70), "'", font=fontweather, fill=0)
+
+        # drawblack.text((150, 70), str("{0}{1} | {2}{3}".format(int(round(temperature['temp_min'])), u'\u00b0',
+        #                                                        int(round(temperature['temp_max'])), u'\u00b0')),
+        #                font=font24, fill=0)
+
+        drawblack.text((10, 100), "Outside", font=font20, fill=0)
+        drawblack.text((150, 100), "Bedroom", font=font20, fill=0)
 
         drawblack.text((20, 120), "A", font=fontweather, fill=0)
         drawblack.text((160, 120), "J", font=fontweather, fill=0)
