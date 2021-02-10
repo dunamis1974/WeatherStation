@@ -168,7 +168,7 @@ def main():
         drawblack.text((160, 100), "Bedroom", font=font20, fill=0)
 
         drawblack.text((40, 120), "A", font=fontweather, fill=0)
-        drawblack.text((190, 120), "J", font=fontweather, fill=0)
+        drawblack.text((185, 120), "J", font=fontweather, fill=0)
         drawblack.text((20, 150), time.strftime('%I:%M %p', time.localtime(sunrise)), font=font20, fill=0)
         drawblack.text((160, 150), time.strftime('%I:%M %p', time.localtime(sunset)), font=font20, fill=0)
 
