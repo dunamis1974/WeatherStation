@@ -14,19 +14,20 @@
 #   BSD license. All text above must be included in any redistribution
 # *
 
+import os
 import sys
-
-sys.path.append(r'lib')
-
+import requests
 import configparser
+import time
 import signal
+import traceback
+import pyowm
+from PIL import Image, ImageDraw, ImageFont
+
+sys.path.append(os.path.join(sys.path[0], 'lib'))
+
 import epd2in7b
 import epdconfig
-import time
-from PIL import Image, ImageDraw, ImageFont
-import traceback
-
-import pyowm
 
 if sys.version_info[0] < 3:
     raise Exception("Must be using Python 3")
@@ -70,6 +71,23 @@ weather_icon_dict = {
 }
 
 
+def get_temperature(device):
+    ha_api_host = config['General']['ha_api_host']
+    ha_api_key = config['General']['ha_api_key']
+    ha_device = config['General'][device]
+
+    url = f"{ha_api_host}/api/states/{ha_device}"
+    headers = {
+        "Authorization": f"Bearer {ha_api_key}",
+        "content-type": "application/json",
+    }
+
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    return data['state']
+
+
 def main():
     epd = epd2in7b.EPD()
 
@@ -88,10 +106,15 @@ def main():
     sunrise = weather.get_sunrise_time()
     sunset = weather.get_sunset_time()
 
+    temperature_outside = get_temperature('ha_device_one')
+    temperature_bedroom = get_temperature('ha_device_two')
+
     print("location: " + location)
     print("weather: " + str(weather))
     print("description: " + description)
     print("temperature: " + str(temperature))
+    print("temperature_outside: " + str(temperature_outside))
+    print("temperature_bedroom: " + str(temperature_bedroom))
     print("humidity: " + str(humidity))
     print("pressure: " + str(pressure))
     print("clouds: " + str(clouds))
@@ -102,14 +125,14 @@ def main():
 
     # Display Weather Information on e-Paper Display
     try:
-        print("Clear...")
+        # print("Clear...")
         epd.init()
         epd.Clear()
 
         # Drawing on the Horizontal image
         HBlackimage = Image.new('1', (epd2in7b.EPD_HEIGHT, epd2in7b.EPD_WIDTH), 255)  # 298*126
 
-        print("Drawing")
+        # print("Drawing")
         drawblack = ImageDraw.Draw(HBlackimage)
 
         font24 = ImageFont.truetype('fonts/arial.ttf', 24)
@@ -128,8 +151,9 @@ def main():
         drawblack.text((10, 45), "Observed at: " + time.strftime('%I:%M %p', time.localtime(reftime)), font=font16,
                        fill=0)
 
-        tempstr = str("{0}{1}C".format(int(round(temperature['temp'])), u'\u00b0'))
-        print(tempstr)
+        # tempstr = str("{0}{1}C".format(int(round(temperature['temp'])), u'\u00b0'))
+        tempstr = str("{0}{1}C".format(temperature_outside, u'\u00b0'))
+        # print(tempstr)
         w4, h4 = font24.getsize(tempstr)
         drawblack.text((10, 70), tempstr, font=font24, fill=0)
         drawblack.text((10 + w4, 70), "'", font=fontweather, fill=0)
@@ -159,7 +183,7 @@ def main():
 
 # gracefully exit without a big exception message if possible
 def ctrl_c_handler(signal, frame):
-    print('Goodbye!')
+    # print('Goodbye!')
     epdconfig.module_init()
     epdconfig.module_exit()
     exit(0)

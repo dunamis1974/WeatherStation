@@ -1,3 +1,7 @@
 [General]
 owm_city = 727012
 owm_api_key = <OWM-API-KEY>
+ha_api_host = <HA-API-HOST>
+ha_api_key = <HA-API-KEY>
+ha_device_one = <HA-DEVICE-1>
+ha_device_two = <HA-DEVICE-2>
