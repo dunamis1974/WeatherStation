@@ -161,10 +161,10 @@ def main():
         drawblack.text((150, 80), temp_bed, font=font24, fill=0)
         drawblack.text((150 + w4, 80), "'", font=fontweather, fill=0)
 
-        drawblack.text((20, 120), "Outside", font=font20, fill=0)
+        drawblack.text((20, 110), "Outside", font=font20, fill=0)
         drawblack.text((160, 120), "Bedroom", font=font20, fill=0)
 
-        drawblack.text((20, 160), str("min {0}{1}          {2}{3} max".format(
+        drawblack.text((20, 150), str("min {0}{1}          {2}{3} max".format(
             int(round(temperature['temp_min'])), u'\u00b0',
             int(round(temperature['temp_max'])), u'\u00b0')),
                        font=font24, fill=0)
